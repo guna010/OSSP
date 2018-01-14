@@ -4,18 +4,20 @@ import csv
 # Create your views here.
 def index(request):
 
-    matrix = []
+    line = []
+    line1 = []
 
     f = open('학교정보.csv', 'r')
+    #f1 = open('장애인편의.csv', 'r')
+    rdr = csv.reader(f)
+    #rdr1 = csv.reader(f1)
 
-    csvReader = csv.reader(f)
-    for row in csvReader:
-        matrix = row
-    school = School(
-        code = matrix[3]
-    )
-    school.save()
+        #for row in rdr1:
+           #line1.append(row)
+
     schools = School.objects.all()
-    f.close()
-    context = {'schools':schools}
-    return render(request , 'myapp/index.html', context)
+    context = {
+        'schools':schools
+    }
+
+    return render(request, 'myapp/index.html', context)
